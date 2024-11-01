@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import CKEditor from "@/Containers/CKEditor";
 import BreadcrumbComponent from "@/Components/BreadcrumbComponent";
 import { Helmet } from "react-helmet";
+import { router } from "@inertiajs/react";
 import { toast } from "react-toastify";
 
 function Index({ sitemap, crumbs }) {
@@ -28,6 +29,12 @@ function Index({ sitemap, crumbs }) {
         setUrl("");
     };
     const handleShow = () => setShowModal(true);
+
+    const handleView = (id) => {
+        router.visit("/admin/sitemap/" + id + "/edit", {
+            method: "get",
+        });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();

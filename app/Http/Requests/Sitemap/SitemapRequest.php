@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Sitemap;
 
+use App\Http\Requests\BaseRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SitemapRequest extends FormRequest
+class SitemapRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -29,10 +30,11 @@ class SitemapRequest extends FormRequest
     public function methodPut()
     {
         return [
-            'page' => 'required|string|max:255',
-            'content' => 'required|string',
-            'url' => 'required|max:255',
-            'static_page' => 'required|integer'
+            'page' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
+            'url' => 'nullable|max:255',
+            'status' => 'nullable | boolean',
+            'static_page' => 'required|boolean',
         ];
     }
 

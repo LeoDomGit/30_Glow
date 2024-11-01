@@ -72,7 +72,14 @@ class SitemapController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $this->crumbs = [
+            ['name' => 'Sitemap', 'url' => '/admin/Sitemap'],
+            ['name' => 'Danh sách Sitemap', 'url' => '/admin/Sitemap'],
+            ['name' => 'Chi tiết Sitemap', 'url' => '/admin/Sitemap/' . $id . '/edit'],
+        ];
+        $this->data = $this->model::findOrFail($id);
+        // dd($this->data);
+        return Inertia::render('Sitemap/Edit', ['sitemap' => $this->data, 'crumbs' => $this->crumbs]);
     }
 
     /**
@@ -80,7 +87,7 @@ class SitemapController extends Controller
      */
     public function update(SitemapRequest $request, $id)
     {
-        $this->data = $request->all();
+        $this->data = $request->validated();
         $this->instance = $this->model::findOrFail($id)->update($this->data);
         if ($this->instance) {
             $this->data = $this->model::all();
